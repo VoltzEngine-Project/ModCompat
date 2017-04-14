@@ -38,7 +38,7 @@ public class RFEnergyHandler extends EnergyHandler
     protected RFEnergyHandler(double ratio)
     {
         super("rf", "flux", "rf", ratio);
-        TO_RF_FROM_UE = toForgienEnergy;
+        TO_RF_FROM_UE = toForeignEnergy;
         TO_UE_FROM_RF = toUEEnergy;
         //TODO load handler even if TE or it's core is not loaded
         //Instead check that the 4 API files used exist then load so we support any mod that uses RF
@@ -52,7 +52,7 @@ public class RFEnergyHandler extends EnergyHandler
             if (handler instanceof IEnergyReceiver)
             {
                 //TODO check for rounding errors
-                return ((IEnergyReceiver) handler).receiveEnergy(direction, (int) (energy * toForgienEnergy), !doReceive) * toUEEnergy;
+                return ((IEnergyReceiver) handler).receiveEnergy(direction, (int) (energy * toForeignEnergy), !doReceive) * toUEEnergy;
             }
         }
         return 0;
@@ -65,7 +65,7 @@ public class RFEnergyHandler extends EnergyHandler
         {
             if (handler instanceof IEnergyProvider)
             {
-                return ((IEnergyProvider) handler).extractEnergy(direction, (int) (energy * toForgienEnergy), !doExtract) * toUEEnergy;
+                return ((IEnergyProvider) handler).extractEnergy(direction, (int) (energy * toForeignEnergy), !doExtract) * toUEEnergy;
             }
         }
         return 0;
@@ -228,7 +228,7 @@ public class RFEnergyHandler extends EnergyHandler
     {
         if (is != null && is.getItem() instanceof IEnergyContainerItem)
         {
-            return ((IEnergyContainerItem) is.getItem()).receiveEnergy(is, (int) (joules * toForgienEnergy), !docharge) * toUEEnergy;
+            return ((IEnergyContainerItem) is.getItem()).receiveEnergy(is, (int) (joules * toForeignEnergy), !docharge) * toUEEnergy;
         }
         return 0;
     }
@@ -238,7 +238,7 @@ public class RFEnergyHandler extends EnergyHandler
     {
         if (is != null && is.getItem() instanceof IEnergyContainerItem)
         {
-            return ((IEnergyContainerItem) is.getItem()).extractEnergy(is, (int) (joules * toForgienEnergy), !doDischarge) * toUEEnergy;
+            return ((IEnergyContainerItem) is.getItem()).extractEnergy(is, (int) (joules * toForeignEnergy), !doDischarge) * toUEEnergy;
         }
         return 0;
     }
@@ -246,7 +246,7 @@ public class RFEnergyHandler extends EnergyHandler
     @Override
     public ItemStack getItemWithCharge(ItemStack itemStack, double energy)
     {
-        chargeItem(itemStack, (energy * toForgienEnergy), true);
+        chargeItem(itemStack, (energy * toForeignEnergy), true);
         return itemStack;
     }
 

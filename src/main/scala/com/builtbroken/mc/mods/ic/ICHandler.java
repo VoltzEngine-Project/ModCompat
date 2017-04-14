@@ -23,7 +23,7 @@ public class ICHandler extends EnergyHandler
     public ICHandler()
     {
         super("IndustrialCraft", "Energy Unit", "eu", 10);
-        TO_UE = toForgienEnergy;
+        TO_UE = toForeignEnergy;
         FROM_UE = toUEEnergy;
     }
 
@@ -32,7 +32,7 @@ public class ICHandler extends EnergyHandler
     {
         if (handler instanceof IEnergyStorage)
         {
-            double provided = energy * toForgienEnergy;
+            double provided = energy * toForeignEnergy;
             int energyStored = ((IEnergyStorage) handler).getStored();
             int space = ((IEnergyStorage) handler).getCapacity() - energyStored;
             if (!doReceive)
@@ -56,7 +56,7 @@ public class ICHandler extends EnergyHandler
             {
                 return ((IEnergySink) handler).getDemandedEnergy() * toUEEnergy;
             }
-            return ((IEnergySink) handler).injectEnergy(direction, energy * toForgienEnergy, getVoltageForTier(((IEnergySink) handler).getSinkTier())) * toUEEnergy;
+            return ((IEnergySink) handler).injectEnergy(direction, energy * toForeignEnergy, getVoltageForTier(((IEnergySink) handler).getSinkTier())) * toUEEnergy;
         }
         return 0;
     }
@@ -70,7 +70,7 @@ public class ICHandler extends EnergyHandler
         }
         else if (handler instanceof IEnergySource && ((IEnergySource) handler).emitsEnergyTo(null, direction))
         {
-            double request = energy * toForgienEnergy;
+            double request = energy * toForeignEnergy;
             double e = Math.min(request, ((IEnergySource) handler).getOfferedEnergy());
             ((IEnergySource) handler).drawEnergy(e);
             return e * toUEEnergy;
