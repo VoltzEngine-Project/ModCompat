@@ -3,6 +3,7 @@ package com.builtbroken.mc.mods.te;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyStorage;
 import cofh.thermalexpansion.block.TilePowered;
+import com.builtbroken.mc.lib.energy.UniversalEnergySystem;
 import com.builtbroken.mc.mods.rf.RFEnergyHandler;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -14,7 +15,7 @@ public class ThermalExpansionEnergyHandler extends RFEnergyHandler
 {
     public ThermalExpansionEnergyHandler()
     {
-        super(RFEnergyHandler.INSTANCE.toUEEnergy);
+        super(UniversalEnergySystem.RF_HANDLER.toUEEnergy);
     }
 
     @Override

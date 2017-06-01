@@ -1,9 +1,9 @@
 package com.builtbroken.mc.mods.rf;
 
 import com.builtbroken.mc.core.Engine;
+import com.builtbroken.mc.framework.multiblock.EnumMultiblock;
 import com.builtbroken.mc.lib.energy.UniversalEnergySystem;
 import com.builtbroken.mc.lib.mod.loadable.AbstractLoadable;
-import com.builtbroken.mc.framework.multiblock.EnumMultiblock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.tileentity.TileEntity;
@@ -19,7 +19,8 @@ public class RFLoader extends AbstractLoadable
     {
         super.init();
         Engine.instance.logger().info("RF support loaded");
-        UniversalEnergySystem.register(RFEnergyHandler.INSTANCE); //TODO add config setting
+        UniversalEnergySystem.RF_HANDLER = new RFEnergyHandler(2); //TODO add config setting
+        UniversalEnergySystem.register(UniversalEnergySystem.RF_HANDLER);
 
         if (Engine.multiBlock != null)
         {

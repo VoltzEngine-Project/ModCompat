@@ -22,7 +22,6 @@ import java.util.Map;
  */
 public class RFEnergyHandler extends EnergyHandler
 {
-    public static final RFEnergyHandler INSTANCE = new RFEnergyHandler(2); //TODO make ratio configurable
     /** Overrides handling for thermal expansion machines directly */
     public static RFEnergyHandler thermalExpansionHandler;
 
@@ -35,7 +34,7 @@ public class RFEnergyHandler extends EnergyHandler
     private Map<Class, Field> classToEnergyFieldMap = new HashMap();
 
     //TODO ensure that ratio does come with a loss in energy due to rounding errors
-    protected RFEnergyHandler(double ratio)
+    public RFEnergyHandler(double ratio)
     {
         super("rf", "flux", "rf", ratio);
         TO_RF_FROM_UE = toForeignEnergy;
