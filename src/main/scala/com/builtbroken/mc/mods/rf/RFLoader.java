@@ -14,12 +14,13 @@ import net.minecraft.world.World;
  */
 public class RFLoader extends AbstractLoadable
 {
+    public static double RF_RATIO = 2;
     @Override
     public void init()
     {
         super.init();
         Engine.instance.logger().info("RF support loaded");
-        UniversalEnergySystem.RF_HANDLER = new RFEnergyHandler(2); //TODO add config setting
+        UniversalEnergySystem.RF_HANDLER = new RFEnergyHandler(RF_RATIO); //TODO add config setting
         UniversalEnergySystem.register(UniversalEnergySystem.RF_HANDLER);
 
         if (Engine.multiBlock != null)
