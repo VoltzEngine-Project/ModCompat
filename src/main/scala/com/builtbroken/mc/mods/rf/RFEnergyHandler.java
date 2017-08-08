@@ -177,6 +177,17 @@ public class RFEnergyHandler extends EnergyHandler
     }
 
     @Override
+    public double setFullCharge(Object handler)
+    {
+        //Override for thermal expansion support, improves performance
+        if(thermalExpansionHandler != null && thermalExpansionHandler.handle(handler))
+        {
+            return thermalExpansionHandler.setFullCharge(handler);
+        }
+        return receiveEnergy(handler, ForgeDirection.UNKNOWN, Integer.MAX_VALUE, true);
+    }
+
+    @Override
     public boolean doIsHandler(Object obj, ForgeDirection dir)
     {
         return obj instanceof IEnergyHandler || obj instanceof IEnergyProvider || obj instanceof IEnergyReceiver;

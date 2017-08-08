@@ -185,6 +185,12 @@ public class ICHandler extends EnergyHandler
         return e * toUEEnergy;
     }
 
+    @Override
+    public double setFullCharge(Object handler)
+    {
+        return receiveEnergy(handler, ForgeDirection.UNKNOWN, Integer.MAX_VALUE, true);
+    }
+
     private int getVoltageForTier(int tier)
     {
         switch (tier)
