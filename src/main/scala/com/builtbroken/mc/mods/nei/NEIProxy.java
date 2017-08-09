@@ -1,8 +1,8 @@
 package com.builtbroken.mc.mods.nei;
 
 import com.builtbroken.mc.core.Engine;
-import com.builtbroken.mc.lib.mod.ModProxy;
-import com.builtbroken.mc.lib.mod.Mods;
+import com.builtbroken.mc.framework.mod.ModProxy;
+import com.builtbroken.mc.framework.mod.Mods;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;

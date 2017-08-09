@@ -1,8 +1,8 @@
 package com.builtbroken.mc.mods.ae;
 
 import com.builtbroken.mc.lib.helper.WrenchUtility;
-import com.builtbroken.mc.lib.mod.ModProxy;
-import com.builtbroken.mc.lib.mod.Mods;
+import com.builtbroken.mc.framework.mod.ModProxy;
+import com.builtbroken.mc.framework.mod.Mods;
 
 /**
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.

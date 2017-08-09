@@ -1,6 +1,6 @@
 package com.builtbroken.mc.mods.ic;
 
-import com.builtbroken.mc.lib.energy.EnergyHandler;
+import com.builtbroken.mc.framework.energy.EnergyHandler;
 import ic2.api.energy.tile.IEnergyAcceptor;
 import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;

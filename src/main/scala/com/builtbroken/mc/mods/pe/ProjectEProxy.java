@@ -3,8 +3,8 @@ package com.builtbroken.mc.mods.pe;
 import com.builtbroken.mc.core.Engine;
 import com.builtbroken.mc.core.content.tool.ItemSheetMetalTools;
 import com.builtbroken.mc.core.content.tool.ItemSimpleCraftingTool;
-import com.builtbroken.mc.lib.mod.ModProxy;
-import com.builtbroken.mc.lib.mod.Mods;
+import com.builtbroken.mc.framework.mod.ModProxy;
+import com.builtbroken.mc.framework.mod.Mods;
 import moze_intel.projecte.utils.NBTWhitelist;
 import net.minecraft.item.ItemStack;
 

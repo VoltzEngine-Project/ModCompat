@@ -1,7 +1,7 @@
 package com.builtbroken.mc.mods.oc;
 
-import com.builtbroken.mc.lib.mod.ModProxy;
-import com.builtbroken.mc.lib.mod.Mods;
+import com.builtbroken.mc.framework.mod.ModProxy;
+import com.builtbroken.mc.framework.mod.Mods;
 import li.cil.oc.api.Driver;
 
 /**

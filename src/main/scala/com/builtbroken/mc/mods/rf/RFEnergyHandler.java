@@ -3,7 +3,7 @@ package com.builtbroken.mc.mods.rf;
 import cofh.api.energy.*;
 import com.builtbroken.jlib.lang.StringHelpers;
 import com.builtbroken.mc.core.Engine;
-import com.builtbroken.mc.lib.energy.EnergyHandler;
+import com.builtbroken.mc.framework.energy.EnergyHandler;
 import com.builtbroken.mc.lib.helper.ReflectionUtility;
 import com.builtbroken.mc.imp.transform.vector.Pos;
 import net.minecraft.item.ItemStack;

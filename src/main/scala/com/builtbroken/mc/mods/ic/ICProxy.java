@@ -1,9 +1,9 @@
 package com.builtbroken.mc.mods.ic;
 
-import com.builtbroken.mc.lib.energy.UniversalEnergySystem;
+import com.builtbroken.mc.framework.energy.UniversalEnergySystem;
 import com.builtbroken.mc.lib.helper.WrenchUtility;
-import com.builtbroken.mc.lib.mod.ModProxy;
-import com.builtbroken.mc.lib.mod.Mods;
+import com.builtbroken.mc.framework.mod.ModProxy;
+import com.builtbroken.mc.framework.mod.Mods;
 import net.minecraftforge.common.MinecraftForge;
 
 /**

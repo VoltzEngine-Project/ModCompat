@@ -2,8 +2,8 @@ package com.builtbroken.mc.mods;
 
 import com.builtbroken.mc.core.Engine;
 import com.builtbroken.mc.core.References;
-import com.builtbroken.mc.lib.mod.Mods;
-import com.builtbroken.mc.lib.mod.loadable.LoadableHandler;
+import com.builtbroken.mc.framework.mod.Mods;
+import com.builtbroken.mc.framework.mod.loadable.LoadableHandler;
 import com.builtbroken.mc.mods.ae.AEProxy;
 import com.builtbroken.mc.mods.bc.BCProxy;
 import com.builtbroken.mc.mods.ic.ICProxy;

@@ -2,8 +2,8 @@ package com.builtbroken.mc.mods.rf;
 
 import com.builtbroken.mc.core.Engine;
 import com.builtbroken.mc.framework.multiblock.EnumMultiblock;
-import com.builtbroken.mc.lib.energy.UniversalEnergySystem;
-import com.builtbroken.mc.lib.mod.loadable.AbstractLoadable;
+import com.builtbroken.mc.framework.energy.UniversalEnergySystem;
+import com.builtbroken.mc.framework.mod.loadable.AbstractLoadable;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.tileentity.TileEntity;
