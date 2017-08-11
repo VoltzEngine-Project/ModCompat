@@ -1,8 +1,8 @@
 package com.builtbroken.mc.mods.rf
 
 import com.builtbroken.mc.api.energy.{IEnergyBuffer, IEnergyBufferProvider}
+import com.builtbroken.mc.framework.energy.data.EnergyBuffer
 import com.builtbroken.mc.framework.multiblock.TileMulti
-import com.builtbroken.mc.prefab.energy.EnergyBuffer
 import net.minecraftforge.common.util.ForgeDirection
 
 /**
