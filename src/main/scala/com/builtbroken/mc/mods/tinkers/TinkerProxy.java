@@ -81,7 +81,7 @@ public class TinkerProxy extends ModProxy
 
                         } catch (Exception e)
                         {
-                            Engine.instance.logger().error("Failed to reflect into tinkers to correct a duplication bug for gears.", e);
+                            Engine.logger().error("Failed to reflect into tinkers to correct a duplication bug for gears.", e);
                         }
                         Smeltery.addMelting(new ItemStack(DefinedGenItems.GEAR.item, 1, mat.ordinal()), Blocks.iron_block, 0, 600, new FluidStack(fluid, 144));
                     }

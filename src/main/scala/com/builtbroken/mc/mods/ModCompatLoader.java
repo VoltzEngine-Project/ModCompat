@@ -53,7 +53,7 @@ public class ModCompatLoader extends AbstractMod
         fireProxyPreInit = false;
         super.preInit(event);
         //Mod Support
-        Engine.config.setCategoryComment("Mod_Support", "If true the proxy class for the mod will be loaded enabling support, set to false if support is not required or breaks the game.");
+        Engine.loaderInstance.getConfig().setCategoryComment("Mod_Support", "If true the proxy class for the mod will be loaded enabling support, set to false if support is not required or breaks the game.");
         loader.applyModule(NEIProxy.class); //Uses reflection instead of API files
         //loader.applyModule(OCProxy.class, Mods.OC.isLoaded());
         loader.applyModule(TinkerProxy.class, Mods.TINKERS.isLoaded());

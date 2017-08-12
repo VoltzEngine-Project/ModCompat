@@ -2,7 +2,7 @@ package com.builtbroken.mc.mods.nei;
 
 import com.builtbroken.mc.framework.json.imp.IJsonProcessor;
 import com.builtbroken.mc.framework.json.processors.JsonGenData;
-import com.builtbroken.mc.framework.json.processors.recipe.JsonItemEntry;
+import com.builtbroken.mc.framework.json.data.JsonItemEntry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

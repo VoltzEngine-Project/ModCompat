@@ -20,7 +20,7 @@ public class TEProxy extends ModProxy
     public void init()
     {
         super.init();
-        Engine.instance.logger().info("Thermal Expansion support loaded");
+        Engine.logger().info("Thermal Expansion support loaded");
         RFEnergyHandler.thermalExpansionHandler = new ThermalExpansionEnergyHandler();
     }
 }

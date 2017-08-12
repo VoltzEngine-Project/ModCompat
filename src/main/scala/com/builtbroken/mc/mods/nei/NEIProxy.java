@@ -80,16 +80,16 @@ public class NEIProxy extends ModProxy
                 }
             } catch (ClassNotFoundException e)
             {
-                Engine.instance.logger().error("Failed to locate NEI API class", e);
+                Engine.logger().error("Failed to locate NEI API class", e);
             } catch (NoSuchMethodException e)
             {
-                Engine.instance.logger().error("Failed to locate NEI hideItem method", e);
+                Engine.logger().error("Failed to locate NEI hideItem method", e);
             } catch (InvocationTargetException e)
             {
-                Engine.instance.logger().error("Failed to invoke NEI hideItem method", e);
+                Engine.logger().error("Failed to invoke NEI hideItem method", e);
             } catch (IllegalAccessException e)
             {
-                Engine.instance.logger().error("Failed to access NEI hideItem method", e);
+                Engine.logger().error("Failed to access NEI hideItem method", e);
             }
         }
     }
