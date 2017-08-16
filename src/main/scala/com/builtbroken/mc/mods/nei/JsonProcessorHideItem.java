@@ -1,6 +1,5 @@
 package com.builtbroken.mc.mods.nei;
 
-import com.builtbroken.mc.framework.json.exceptions.JsonFormatException;
 import com.builtbroken.mc.framework.json.processors.JsonProcessor;
 import com.builtbroken.mc.mods.ModCompatLoader;
 import com.google.gson.JsonElement;
@@ -14,15 +13,8 @@ public class JsonProcessorHideItem extends JsonProcessor<JsonDataHideItem>
     @Override
     public JsonDataHideItem process(JsonElement element)
     {
-        try
-        {
-            Object object = getItemFromJson(element);
-            return new JsonDataHideItem(this, object);
-        }
-        catch (JsonFormatException e)
-        {
-            throw new RuntimeException(e);
-        }
+        Object object = getItemFromJson(element);
+        return new JsonDataHideItem(this, object);
     }
 
     @Override
