@@ -1,8 +1,10 @@
 package com.builtbroken.mc.mods.nei;
 
+import codechicken.nei.api.API;
 import com.builtbroken.mc.core.Engine;
 import com.builtbroken.mc.framework.mod.ModProxy;
 import com.builtbroken.mc.framework.mod.Mods;
+import com.builtbroken.mc.mods.nei.large.Shaped4x4RecipeHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
@@ -39,6 +41,14 @@ public class NEIProxy extends ModProxy
     public static void hideItem(ItemStack item)
     {
         hideItems.add(item);
+    }
+
+    @Override
+    public void preInit()
+    {
+        Shaped4x4RecipeHandler handler = new Shaped4x4RecipeHandler();
+        API.registerRecipeHandler(handler);
+        API.registerUsageHandler(handler);
     }
 
     @Override
