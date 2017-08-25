@@ -90,16 +90,23 @@ public class Shaped4x4RecipeHandler extends TemplateRecipeHandler
         {
             final IRecipe irecipe = (IRecipe) it.next();
 
-            //Match target to output
-            if (InventoryUtility.stacksMatch(irecipe.getRecipeOutput(), result))
+            try
             {
-                //Convert recipe
-                if (irecipe instanceof RecipeShapedOreLarge)
+                //Match target to output
+                if (InventoryUtility.stacksMatch(irecipe.getRecipeOutput(), result))
                 {
-                    Shaped4x4RecipeHandler.CachedShapedRecipe recipe = new CachedShapedRecipe((RecipeShapedOreLarge) irecipe);
-                    recipe.computeVisuals();
-                    this.arecipes.add(recipe);
+                    //Convert recipe
+                    if (irecipe instanceof RecipeShapedOreLarge)
+                    {
+                        Shaped4x4RecipeHandler.CachedShapedRecipe recipe = new CachedShapedRecipe((RecipeShapedOreLarge) irecipe);
+                        recipe.computeVisuals();
+                        this.arecipes.add(recipe);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Engine.logger().error("Shaped4x4RecipeHandler: Found bad RecipeShapedOreLarge while generating crafting list for NEI, result = " + result + " recipe = " + irecipe, e);
             }
         }
 
@@ -114,22 +121,29 @@ public class Shaped4x4RecipeHandler extends TemplateRecipeHandler
         {
             final IRecipe irecipe = (IRecipe) it.next();
 
-            //Convert recipe
-            Shaped4x4RecipeHandler.CachedShapedRecipe recipe = null;
-            if (irecipe instanceof RecipeShapedOreLarge)
+            try
             {
-                recipe = new CachedShapedRecipe((RecipeShapedOreLarge) irecipe);
-            }
-
-            //Match ingredients
-            if (recipe != null && recipe.contains(recipe.ingredients, ingredient.getItem()))
-            {
-                recipe.computeVisuals();
-                if (recipe.contains(recipe.ingredients, ingredient))
+                //Convert recipe
+                Shaped4x4RecipeHandler.CachedShapedRecipe recipe = null;
+                if (irecipe instanceof RecipeShapedOreLarge)
                 {
-                    recipe.setIngredientPermutation(recipe.ingredients, ingredient);
-                    this.arecipes.add(recipe);
+                    recipe = new CachedShapedRecipe((RecipeShapedOreLarge) irecipe);
                 }
+
+                //Match ingredients
+                if (recipe != null && recipe.contains(recipe.ingredients, ingredient.getItem()))
+                {
+                    recipe.computeVisuals();
+                    if (recipe.contains(recipe.ingredients, ingredient))
+                    {
+                        recipe.setIngredientPermutation(recipe.ingredients, ingredient);
+                        this.arecipes.add(recipe);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Engine.logger().error("Shaped4x4RecipeHandler: Found bad RecipeShapedOreLarge while generating recipe list for NEI, usage = " + ingredient + " recipe = " + irecipe, e);
             }
         }
     }
