@@ -78,7 +78,6 @@ public class Shaped4x4RecipeHandler extends TemplateRecipeHandler
         {
             super.loadCraftingRecipes(outputId, results);
         }
-
     }
 
     @Override

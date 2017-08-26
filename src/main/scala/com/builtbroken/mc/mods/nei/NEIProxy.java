@@ -1,19 +1,16 @@
 package com.builtbroken.mc.mods.nei;
 
 import codechicken.nei.api.API;
-import com.builtbroken.mc.core.Engine;
 import com.builtbroken.mc.framework.mod.ModProxy;
 import com.builtbroken.mc.framework.mod.Mods;
+import com.builtbroken.mc.mods.ModCompatLoader;
 import com.builtbroken.mc.mods.nei.large.Shaped4x4RecipeHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,59 +51,48 @@ public class NEIProxy extends ModProxy
     @Override
     public void postInit()
     {
-        if (!lock)
+        if (!hideItems.isEmpty() && !lock)
         {
+            ModCompatLoader.instance.logger().info("Running NEI proxy");
+
             //Only run once as the list is static
             lock = true;
-            try
+
+            for (Object entry : hideItems)
             {
-                Class nei_api_class = Class.forName("codechicken.nei.api.API");
-                Method method = nei_api_class.getMethod("hideItem", ItemStack.class);
-                for (Object obj : hideItems)
+                ModCompatLoader.instance.logger().info("\tHiding: " + entry);
+                if (entry instanceof Block || entry instanceof Item)
                 {
-                    if (obj instanceof Block || obj instanceof Item)
+                    List list = new ArrayList();
+                    if (entry instanceof Block)
                     {
-                        List list = new ArrayList();
-                        if (obj instanceof Block)
-                        {
-                            ((Block) obj).getSubBlocks(Item.getItemFromBlock((Block) obj), ((Block) obj).getCreativeTabToDisplayOn(), list);
-                        }
-                        else
-                        {
-                            ((Item) obj).getSubItems((Item) obj, ((Item) obj).getCreativeTab(), list);
-                        }
-                        for (Object o : list)
-                        {
-                            if (o instanceof ItemStack)
-                            {
-                                method.invoke(null, (ItemStack) o);
-                            }
-                        }
+                        ((Block) entry).getSubBlocks(Item.getItemFromBlock((Block) entry), ((Block) entry).getCreativeTabToDisplayOn(), list);
                     }
-                    else if (obj instanceof ItemStack)
+                    else
                     {
-                        method.invoke(null, (ItemStack) obj);
+                        ((Item) entry).getSubItems((Item) entry, ((Item) entry).getCreativeTab(), list);
+                    }
+                    for (Object o : list)
+                    {
+                        if (o instanceof ItemStack)
+                        {
+                            API.hideItem((ItemStack) o);
+                        }
                     }
                 }
-            } catch (ClassNotFoundException e)
-            {
-                Engine.logger().error("Failed to locate NEI API class", e);
-            } catch (NoSuchMethodException e)
-            {
-                Engine.logger().error("Failed to locate NEI hideItem method", e);
-            } catch (InvocationTargetException e)
-            {
-                Engine.logger().error("Failed to invoke NEI hideItem method", e);
-            } catch (IllegalAccessException e)
-            {
-                Engine.logger().error("Failed to access NEI hideItem method", e);
+                else if (entry instanceof ItemStack)
+                {
+                    API.hideItem((ItemStack) entry);
+                }
             }
+
+            ModCompatLoader.instance.logger().info("Done...");
         }
     }
 
     @Override
     public boolean shouldLoad()
     {
-        return FMLCommonHandler.instance().getSide() == Side.CLIENT && Loader.isModLoaded("NotEnoughItems");
+        return FMLCommonHandler.instance().getSide() == Side.CLIENT && Mods.NEI.isLoaded();
     }
 }
