@@ -56,4 +56,10 @@ public class JsonDataHideItem extends JsonGenData
     {
         return null;
     }
+
+    @Override
+    public String getUniqueID()
+    {
+        return null;
+    }
 }
