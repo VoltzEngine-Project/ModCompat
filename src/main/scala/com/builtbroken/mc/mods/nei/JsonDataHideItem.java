@@ -22,7 +22,7 @@ public class JsonDataHideItem extends JsonGenData
     }
 
     @Override
-    public void register()
+    public void onCreated()
     {
         if (item instanceof Block)
         {
@@ -42,7 +42,7 @@ public class JsonDataHideItem extends JsonGenData
             if (!(object instanceof String || object instanceof JsonItemEntry))
             {
                 item = object;
-                register();
+                onCreated();
             }
         }
         else
