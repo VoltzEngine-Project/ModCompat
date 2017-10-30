@@ -16,6 +16,7 @@ import com.builtbroken.mc.mods.pe.ProjectEProxy;
 import com.builtbroken.mc.mods.rf.RFLoader;
 import com.builtbroken.mc.mods.te.TEProxy;
 import com.builtbroken.mc.mods.tinkers.TinkerProxy;
+import com.builtbroken.mc.mods.waila.WailaLoader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -65,6 +66,7 @@ public class ModCompatLoader extends AbstractMod
         loader.applyModule(BCProxy.class, Mods.BC.isLoaded());
         loader.applyModule(MekProxy.class, Mods.MEKANISM.isLoaded());
         loader.applyModule(ProjectEProxy.class, Mods.PROJECT_E.isLoaded());
+        loader.applyModule(WailaLoader.class, Mods.WAILA.isLoaded());
 
 
         //Check if RF api exists
