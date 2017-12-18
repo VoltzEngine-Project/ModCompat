@@ -1,13 +1,15 @@
 package com.builtbroken.mc.mods.nei;
 
+import codechicken.nei.ItemList;
 import codechicken.nei.api.API;
+import com.builtbroken.mc.framework.json.imp.IJsonGenObject;
 import com.builtbroken.mc.framework.mod.ModProxy;
 import com.builtbroken.mc.framework.mod.Mods;
 import com.builtbroken.mc.mods.ModCompatLoader;
 import com.builtbroken.mc.mods.nei.large.Shaped4x4RecipeHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
+import com.builtbroken.mc.prefab.inventory.InventoryUtility;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -51,6 +53,7 @@ public class NEIProxy extends ModProxy
     @Override
     public void postInit()
     {
+        //Hide items from NEI
         if (!hideItems.isEmpty() && !lock)
         {
             ModCompatLoader.instance.logger().info("Running NEI proxy");
@@ -88,11 +91,66 @@ public class NEIProxy extends ModProxy
 
             ModCompatLoader.instance.logger().info("Done...");
         }
+
+        //Fix NEI caching items before there finished generating subtypes TODO fix
+        //JsonContentLoader.INSTANCE.runActionOnGeneratedObjects(o -> collectSubTypes(o));
     }
+
+    public void collectSubTypes(IJsonGenObject object)
+    {
+        Item item = null;
+        if (object instanceof Item)
+        {
+            item = (Item) object;
+        }
+        else if (object instanceof Block)
+        {
+            item = Item.getItemFromBlock((Block) object);
+        }
+
+        if (item != null)
+        {
+            final List items = new ArrayList();
+            final CreativeTabs[] tabs = item.getCreativeTabs();
+            if (tabs != null)
+            {
+                for (CreativeTabs tab : tabs)
+                {
+                    if (tab != null)
+                    {
+                        item.getSubItems(item, tab, items);
+                    }
+                }
+            }
+
+            if (!items.isEmpty())
+            {
+                API.setItemListEntries(item, items);
+                for (Object o : items)
+                {
+                    if (o instanceof ItemStack)
+                    {
+                        ItemStack stack = (ItemStack) o;
+                        API.addItemVariant(item, stack);
+                        if (!contains(ItemList.items, stack))
+                        {
+                            ItemList.items.add(stack);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean contains(List<ItemStack> list, ItemStack entry)
+    {
+        return list.stream().anyMatch(i -> InventoryUtility.stacksMatch(i, entry));
+    }
+
 
     @Override
     public boolean shouldLoad()
     {
-        return FMLCommonHandler.instance().getSide() == Side.CLIENT && Mods.NEI.isLoaded();
+        return Mods.NEI.isLoaded();
     }
 }

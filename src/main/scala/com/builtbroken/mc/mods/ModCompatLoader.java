@@ -11,7 +11,6 @@ import com.builtbroken.mc.mods.bc.BCProxy;
 import com.builtbroken.mc.mods.ic.ICProxy;
 import com.builtbroken.mc.mods.mek.MekProxy;
 import com.builtbroken.mc.mods.nei.JsonProcessorHideItem;
-import com.builtbroken.mc.mods.nei.NEIProxy;
 import com.builtbroken.mc.mods.pe.ProjectEProxy;
 import com.builtbroken.mc.mods.rf.RFLoader;
 import com.builtbroken.mc.mods.te.TEProxy;
@@ -33,7 +32,7 @@ public class ModCompatLoader extends AbstractMod
 {
     public static final String DOMAIN = References.DOMAIN + "modcompat";
 
-    @SidedProxy(modId = DOMAIN, clientSide = "com.builtbroken.mc.mods.CommonProxy", serverSide = "com.builtbroken.mc.mods.CommonProxy")
+    @SidedProxy(modId = DOMAIN, clientSide = "com.builtbroken.mc.mods.ClientProxy", serverSide = "com.builtbroken.mc.mods.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.Instance(DOMAIN)
@@ -58,7 +57,6 @@ public class ModCompatLoader extends AbstractMod
         super.preInit(event);
         //Mod Support
         Engine.loaderInstance.getConfig().setCategoryComment("Mod_Support", "If true the proxy class for the mod will be loaded enabling support, set to false if support is not required or breaks the game.");
-        loader.applyModule(NEIProxy.class, Mods.NEI.isLoaded());
         //loader.applyModule(OCProxy.class, Mods.OC.isLoaded());
         loader.applyModule(TinkerProxy.class, Mods.TINKERS.isLoaded());
         loader.applyModule(AEProxy.class, Mods.AE.isLoaded());
@@ -67,6 +65,7 @@ public class ModCompatLoader extends AbstractMod
         loader.applyModule(MekProxy.class, Mods.MEKANISM.isLoaded());
         loader.applyModule(ProjectEProxy.class, Mods.PROJECT_E.isLoaded());
         loader.applyModule(WailaLoader.class, Mods.WAILA.isLoaded());
+        proxy.loadModules(loader);
 
 
         //Check if RF api exists
