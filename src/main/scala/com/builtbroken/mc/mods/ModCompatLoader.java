@@ -8,6 +8,7 @@ import com.builtbroken.mc.framework.mod.AbstractProxy;
 import com.builtbroken.mc.framework.mod.Mods;
 import com.builtbroken.mc.mods.ae.AEProxy;
 import com.builtbroken.mc.mods.bc.BCProxy;
+import com.builtbroken.mc.mods.cc.CCProxy;
 import com.builtbroken.mc.mods.ic.ICProxy;
 import com.builtbroken.mc.mods.mek.MekProxy;
 import com.builtbroken.mc.mods.nei.JsonProcessorHideItem;
@@ -65,6 +66,7 @@ public class ModCompatLoader extends AbstractMod
         loader.applyModule(MekProxy.class, Mods.MEKANISM.isLoaded());
         loader.applyModule(ProjectEProxy.class, Mods.PROJECT_E.isLoaded());
         loader.applyModule(WailaLoader.class, Mods.WAILA.isLoaded());
+        loader.applyModule(CCProxy.class, Mods.CC.isLoaded());
         proxy.loadModules(loader);
 
 
