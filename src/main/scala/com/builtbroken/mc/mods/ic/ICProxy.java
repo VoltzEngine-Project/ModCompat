@@ -1,9 +1,11 @@
 package com.builtbroken.mc.mods.ic;
 
+import com.builtbroken.mc.api.energy.IEnergyBufferProvider;
+import com.builtbroken.mc.framework.computer.DataSystemHandler;
 import com.builtbroken.mc.framework.energy.UniversalEnergySystem;
-import com.builtbroken.mc.lib.helper.WrenchUtility;
 import com.builtbroken.mc.framework.mod.ModProxy;
 import com.builtbroken.mc.framework.mod.Mods;
+import com.builtbroken.mc.lib.helper.WrenchUtility;
 import net.minecraftforge.common.MinecraftForge;
 
 /**
@@ -25,5 +27,33 @@ public class ICProxy extends ModProxy
         WrenchUtility.registerWrenchType(new ICWrenchProxy());
         MinecraftForge.EVENT_BUS.register(ICStaticForwarder.INSTANCE);
         UniversalEnergySystem.register(new ICHandler());
+
+        DataSystemHandler.addSharedMethod("ueToIcRatio", tile -> {
+            if (tile instanceof IEnergyBufferProvider)
+            {
+                return (host, method, args) -> {
+                    if (host instanceof IEnergyBufferProvider)
+                    {
+                        return new Object[]{ICHandler.TO_UE};
+                    }
+                    return new Object[]{"Error: Object is not an energy storage"};
+                };
+            }
+            return null;
+        });
+
+        DataSystemHandler.addSharedMethod("icToUeRatio", tile -> {
+            if (tile instanceof IEnergyBufferProvider)
+            {
+                return (host, method, args) -> {
+                    if (host instanceof IEnergyBufferProvider)
+                    {
+                        return new Object[]{ICHandler.FROM_UE};
+                    }
+                    return new Object[]{"Error: Object is not an energy storage"};
+                };
+            }
+            return null;
+        });
     }
 }

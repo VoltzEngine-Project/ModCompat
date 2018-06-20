@@ -1,13 +1,12 @@
 package com.builtbroken.mc.mods.rf;
 
+import com.builtbroken.mc.api.energy.IEnergyBufferProvider;
 import com.builtbroken.mc.core.Engine;
-import com.builtbroken.mc.framework.multiblock.EnumMultiblock;
+import com.builtbroken.mc.framework.computer.DataSystemHandler;
 import com.builtbroken.mc.framework.energy.UniversalEnergySystem;
 import com.builtbroken.mc.framework.mod.loadable.AbstractLoadable;
+import com.builtbroken.mc.framework.multiblock.EnumMultiblock;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
 /**
  * Created by Cow Pi on 8/10/2015.
@@ -15,6 +14,7 @@ import net.minecraft.world.World;
 public class RFLoader extends AbstractLoadable
 {
     public static double RF_RATIO = 2;
+
     @Override
     public void init()
     {
@@ -26,14 +26,35 @@ public class RFLoader extends AbstractLoadable
         if (Engine.multiBlock != null)
         {
             GameRegistry.registerTileEntity(TileMultiEnergyRF.class, EnumMultiblock.ENERGY_RF.getTileName());
-            EnumMultiblock.ENERGY_RF.provider = new ITileEntityProvider()
-            {
-                @Override
-                public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_)
+            EnumMultiblock.ENERGY_RF.provider = (p_149915_1_, p_149915_2_) -> new TileMultiEnergyRF();
+
+            DataSystemHandler.addSharedMethod("ueToRfRatio", tile -> {
+                if (tile instanceof IEnergyBufferProvider)
                 {
-                    return new TileMultiEnergyRF();
+                    return (host, method, args) -> {
+                        if (host instanceof IEnergyBufferProvider)
+                        {
+                            return new Object[]{RFEnergyHandler.TO_RF_FROM_UE};
+                        }
+                        return new Object[]{"Error: Object is not an energy storage"};
+                    };
                 }
-            };
+                return null;
+            });
+
+            DataSystemHandler.addSharedMethod("rfToUeRatio", tile -> {
+                if (tile instanceof IEnergyBufferProvider)
+                {
+                    return (host, method, args) -> {
+                        if (host instanceof IEnergyBufferProvider)
+                        {
+                            return new Object[]{RFEnergyHandler.TO_UE_FROM_RF};
+                        }
+                        return new Object[]{"Error: Object is not an energy storage"};
+                    };
+                }
+                return null;
+            });
         }
     }
 }
